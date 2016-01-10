@@ -15,11 +15,21 @@ namespace LostMonitors.Web
             var player1Instance = PlayerService.GetPlayer(player1).GetInstance();
             var player2Instance = PlayerService.GetPlayer(player2).GetInstance();
 
-            var game = new Game(player1Instance, player2Instance);
+            var game = new Game(player1Instance.GetFriendlyName(), player2Instance.GetFriendlyName());
+            var state = game.Init(player1Instance, player2Instance);
+            Games.Add(game);
+
             var gameId = game.Id.ToString();
             Groups.Add(Context.ConnectionId, gameId);
-            Games.Add(game);
-            Clients.Group(gameId).start("started: " + game.Id);
+
+            Clients.Group(gameId).start(gameId, state);
+        }
+
+        public void Play(string gameId)
+        {
+            var game = Games.First(x => x.Id.ToString() == gameId);
+            var turn = game.Play();
+            Clients.Group(gameId).turn(turn);
         }
     }
 }

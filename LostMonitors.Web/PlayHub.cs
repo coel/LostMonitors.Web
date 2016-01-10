@@ -21,12 +21,5 @@ namespace LostMonitors.Web
             Games.Add(game);
             Clients.Group(gameId).start("started: " + game.Id);
         }
-        /*
-        public void Join(string gameId)
-        {
-            Groups.Add(Context.ConnectionId, gameId);
-            Clients.OthersInGroup(gameId).hello("joined: " + gameId);
-        }
-        */
     }
 }

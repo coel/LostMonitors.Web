@@ -1,12 +1,6 @@
 ﻿@model LostMonitors.Web.Models.GamesModel
 
 <div id="selection">
-@*
-    @foreach (var game in Model.ExistingGames)
-    {
-        <p class="join" data-id="@game.Id">@game.Player1 vs @game.Player2</p>
-    }
-*@
     <select id="player1"> @foreach (var item in Model.AvailablePlayers) { <option>@item.Name</option> } </select> vs.
     <select id="player2"> @foreach (var item in Model.AvailablePlayers) { <option>@item.Name</option> } </select>
     <button id="start">Start</button>

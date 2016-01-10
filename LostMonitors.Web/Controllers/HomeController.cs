@@ -16,7 +16,6 @@ namespace LostMonitors.Web.Controllers
             var players = PlayerService.GetPlayers();
 
             var model = new GamesModel();
-            //model.ExistingGames = PlayHub.Games.Select(x => new ExistingGameModel { Id = x.Id.ToString(), Player1 = x.Player1, Player2 = x.Player2}).ToList();
             model.AvailablePlayers = players.Select(x => new PlayerModel { Name = x.Name }).ToList();
 
             return View(model);

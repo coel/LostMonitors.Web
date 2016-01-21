@@ -21,7 +21,6 @@ namespace LostMonitors.Web
                 "~/Scripts/app.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                 "~/Content/bootstrap.css",
                  "~/Content/Site.css"));
         }
     }

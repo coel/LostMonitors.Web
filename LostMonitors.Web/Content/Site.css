@@ -1,36 +1,63 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    margin: 1vw 1vw 1vw 1vw;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.outer {
+    align-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    height: 90vh;
+    justify-content: space-between;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.hand {
+    justify-content: center;
+    width: 10vw;
+    height: 90vh;
 }
 
-/* Set padding to display errors that occur during databinding */
-.padding-error {
-    padding-top: 20px;
+.discard {
+    justify-content: space-around;
+    width: 10vw;
+    height: 90vh;
 }
 
-@media only screen and (max-width: 767px) {
-    .nofloat {
-        float: none;
-        padding: 10px 15px;
-    }
+.expedition {
+    width: 28vw;
+    height: 90vh;
+}
+
+.expedition .row {
+    justify-content: space-between;
+    align-content: space-between;
+    height: 16vh;
+    width: 28vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 5vw;
+    height: 10vh;
+    border: 1px solid black;
+    border-radius: 0.4vw;
+}
+
+.expedition .card {
+    width: 4vw;
+    height: 7vh;
+    display: inline-block;
+}
+
+.discard .card {
+
+}
+
+.expedition div.reverse {
+    flex-direction: row-reverse;
 }

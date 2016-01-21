@@ -6,7 +6,7 @@
     align-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    height: 90vh;
+    height: 80vh;
     justify-content: space-between;
 }
 
@@ -41,6 +41,10 @@
     flex-wrap: wrap;
 }
 
+.expedition .reverse {
+    flex-direction: row-reverse;
+}
+
 .card {
     width: 5vw;
     height: 10vh;
@@ -52,12 +56,49 @@
     width: 4vw;
     height: 7vh;
     display: inline-block;
+    border-color: #ccc;
+    background-color: #ccc;
+    opacity: 0.1;
 }
 
 .discard .card {
 
 }
 
-.expedition div.reverse {
-    flex-direction: row-reverse;
+.info {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 1vh;
+    width: 98vw;
+}
+
+.player {
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+}
+
+.player span {
+    align-self: flex-end;
+    bottom: 0;
+    font-size: 4vw;
+}
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 10vw;
+}
+
+.deck .card {
+    text-align: center;
+    font-size: 4vw;
+}
+
+.card span {
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
 }

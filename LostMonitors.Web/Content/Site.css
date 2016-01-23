@@ -45,11 +45,20 @@
     flex-direction: row-reverse;
 }
 
+.spot {
+    border: 1px solid powderblue;
+    width: 5vw;
+    height: 10vh;
+    background-color: aliceblue;
+    border-radius: 0.4vw;
+}
+
 .card {
     width: 5vw;
     height: 10vh;
-    border: 1px solid black;
+    border: 1px solid darksalmon;
     border-radius: 0.4vw;
+    background-color: antiquewhite;
 }
 
 .expedition .card {
@@ -85,14 +94,14 @@
     font-size: 4vw;
 }
 
-.deck {
+#deck {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 10vw;
 }
 
-.deck .card {
+#deck .card {
     text-align: center;
     font-size: 4vw;
 }
@@ -101,4 +110,41 @@
     vertical-align: middle;
     text-align: center;
     display: inline-block;
+    font-size: 5vw;
+    width: 100%;
+}
+
+body {
+    overflow: hidden;
+}
+
+.card.d0 {
+    border: 1px solid gold !important;
+    background-color: lemonchiffon !important;
+    color: gold !important;
+}
+
+.card.d1 {
+    border: 1px solid dodgerblue !important;
+    background-color: lightblue !important;
+    color: dodgerblue !important;
+}
+
+.card.d2 {
+    border: 1px solid silver !important;
+    background-color: snow !important;
+    color: white !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.card.d3 {
+    border: 1px solid forestgreen !important;
+    background-color: palegreen !important;
+    color: forestgreen !important;
+}
+
+.card.d4 {
+    border: 1px solid firebrick !important;
+    background-color: lightcoral !important;
+    color: firebrick !important;
 }

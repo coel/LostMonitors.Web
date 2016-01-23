@@ -16,15 +16,15 @@
 
 <div id="board">
     <div class="outer">
-        <div id="player1" class="container hand">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+        <div id="player1hand" class="container hand">
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
         </div>
         <div id="" class="container expedition">
             <div class="row reverse">
@@ -177,22 +177,22 @@
                 <div class="card"></div>
             </div>
         </div>
-        <div id="player2" class="container hand">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+        <div id="player2hand" class="container hand">
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
+            <div class="spot"></div>
         </div>
     </div>
     <div class="info">
         <div class="player">
             <span>Player 1</span>
         </div>
-        <div class="deck">
+        <div id="deck">
             <div class="card">
                 <span>44</span>
             </div>
@@ -202,7 +202,9 @@
         </div>
     </div>
 </div>
-
+<div id="play">
+    
+</div>
 @section Scripts{
     @Scripts.Render("~/bundles/app")
     @Scripts.Render("~/signalr/hubs")

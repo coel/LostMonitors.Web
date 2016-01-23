@@ -10,12 +10,14 @@
     const PLAYER2 = 1;
     const MAX_HAND = 8;
     var hands = [[], []];
+    var expeditions = [[[], [], [], [], []], [[], [], [], [], []]];
+    var turn = PLAYER1;
 
-    function getSpotInHand(player) {
+    function getSpotInHand(player, card) {
         var hand = hands[player];
         for (var i = 0; i < MAX_HAND; i++) {
             if (!hand[i]) {
-                hand[i] = true;
+                hand[i] = card;
                 break;
             }
         }
@@ -42,7 +44,7 @@
         });
         $('#play').append(el);
         el.fadeIn(1000, function() {
-            var spotIndex = getSpotInHand(player);
+            var spotIndex = getSpotInHand(player, card);
             var spot = $($('.spot', handContainer(player))[spotIndex]);
             var spotPos = spot.offset();
 
@@ -67,8 +69,71 @@
         }
     };
 
-    game.client.turn = function (turn) {
-        console.log(turn);
+    function getSpotInExpedition(player, card) {
+        var cards = expeditions[player][card.Destination];
+        var position = cards.length;
+        cards.push(card);
+        return position;
+    }
+
+    function expeditionContainer(player, destination) {
+        if (player == PLAYER1)
+            return $($('#player1expedition .row')[destination]);
+
+        return $($('#player2expedition .row')[destination]);
+    }
+
+    function play(player, move) {
+        var hand = hands[player];
+        for (var i = 0; i < MAX_HAND; i++) {
+            if (hand[i].Destination == move.PlayCard.Destination && hand[i].Value == move.PlayCard.Value) {
+                hand[i] = null;
+                break;
+            }
+        }
+        var spot = $($('.spot', handContainer(player))[i]);
+        var el = $('.card', spot);
+        console.log(spot);
+        console.log(el);
+        var spotPos = spot.offset();
+        el.remove();
+        console.log(spotPos);
+        $('#play').append(el);
+        el.css({
+            position: 'absolute',
+            top: spotPos.top,
+            left: spotPos.left
+        });
+
+        //if (move.PlayIsDiscard)
+
+        var destIndex = getSpotInExpedition(player, move.PlayCard);
+        console.log(destIndex);
+        console.log(expeditionContainer(player, move.PlayCard.Destination));
+        var dest = $($('.card', expeditionContainer(player, move.PlayCard.Destination))[destIndex]);
+        var destPos = dest.offset();
+        console.log(dest);
+        console.log(destPos);
+        el.animate({
+            top: destPos.top,
+            left: destPos.left
+        }, 1000, function () {
+            el.remove();
+            el.css({ position: 'inherit' });
+            dest.replaceWith(el);
+        });
+        
+    }
+
+    game.client.turn = function (move) {
+        console.log(move);
+
+        play(turn, move);
+        if (turn == PLAYER1) {
+            turn = PLAYER2;
+        } else {
+            turn = PLAYER1;
+        }
     };
 
     $.connection.hub.start().done(function () {
@@ -78,7 +143,7 @@
             $('#board').show();
         });
 
-        $('#turn').click(function () {
+        $('#deck').click(function () {
             game.server.play(id);
         });
     });

@@ -65,6 +65,13 @@
     width: 4vw;
     height: 7vh;
     display: inline-block;
+}
+
+.expedition .card span {
+    font-size: 2vw;
+}
+
+.expedition .place {
     border-color: #ccc;
     background-color: #ccc;
     opacity: 0.1;

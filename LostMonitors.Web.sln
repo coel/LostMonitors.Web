@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostMonitors.Web", "LostMon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostMonitors.Core", "..\LostMonitors.Core\LostMonitors.Core\LostMonitors.Core.csproj", "{23EA2D04-D945-44CF-8CD1-A5CF9E84B0B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostMonitors.SimplePlayer", "..\LostMonitors.SimplePlayer\LostMonitors.SimplePlayer\LostMonitors.SimplePlayer.csproj", "{385626DA-4E99-4F43-B77F-B86795A1F6FB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{23EA2D04-D945-44CF-8CD1-A5CF9E84B0B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EA2D04-D945-44CF-8CD1-A5CF9E84B0B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EA2D04-D945-44CF-8CD1-A5CF9E84B0B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{385626DA-4E99-4F43-B77F-B86795A1F6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{385626DA-4E99-4F43-B77F-B86795A1F6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{385626DA-4E99-4F43-B77F-B86795A1F6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{385626DA-4E99-4F43-B77F-B86795A1F6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

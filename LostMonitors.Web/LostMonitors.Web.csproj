@@ -212,10 +212,6 @@
       <Project>{23ea2d04-d945-44cf-8cd1-a5cf9e84b0b4}</Project>
       <Name>LostMonitors.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\LostMonitors.SimplePlayer\LostMonitors.SimplePlayer\LostMonitors.SimplePlayer.csproj">
-      <Project>{385626da-4e99-4f43-b77f-b86795a1f6fb}</Project>
-      <Name>LostMonitors.SimplePlayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

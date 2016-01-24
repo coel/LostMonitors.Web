@@ -14,6 +14,7 @@
     var turn = PLAYER1;
     var deck = 60;
     var scores = [0, 0];
+    var discards = [[], [], [], [], []];
 
     function getSpotInHand(player, card) {
         var hand = hands[player];
@@ -33,6 +34,25 @@
         return $('#player2hand');
     }
 
+    function disableNext() {
+        $('#deck').off();
+        $('body').off();
+    }
+
+    function enableNext() {
+        disableNext();
+
+        $('#deck').click(function () {
+            game.server.play(id);
+        });
+
+        $('body').keyup(function (evt) {
+            if (evt.which == 32) {
+                game.server.play(id);
+            }
+        });
+    }
+
     function deal(player, card) {
         var value = card.Value == 0 ? '⚒' : card.Value;
         var el = $('<div class="card"><span>' + value + '</span></div>');
@@ -49,6 +69,7 @@
             var spotIndex = getSpotInHand(player, card);
             var spot = $($('.spot', handContainer(player))[spotIndex]);
             var spotPos = spot.offset();
+            enableNext();
 
             el.animate({
                 top: spotPos.top,
@@ -64,6 +85,7 @@
     }
 
     game.client.start = function (gameId, initialState) {
+        disableNext();
         console.log(initialState);
         id = gameId;
         console.assert(initialState.Player1Cards.length == MAX_HAND && initialState.Player2Cards.length == MAX_HAND, MAX_HAND + " cards weren't delt each!?");
@@ -115,7 +137,13 @@
         $('#player' + (player + 1) + 'info .score').text(totalScore);
     }
 
+    function discardContainer(destination) {
+        return $($('#discards .pile')[destination]);
+    }
+
     function play(player, move) {
+        disableNext();
+
         var hand = hands[player];
         for (var i = 0; i < MAX_HAND; i++) {
             if (hand[i].Destination == move.PlayCard.Destination && hand[i].Value == move.PlayCard.Value) {
@@ -137,28 +165,46 @@
             left: spotPos.left
         });
 
-        //if (move.PlayIsDiscard)
-
-        var destIndex = getSpotInExpedition(player, move.PlayCard);
-        console.log(destIndex);
-        console.log(expeditionContainer(player, move.PlayCard.Destination));
-        var dest = $($('.card', expeditionContainer(player, move.PlayCard.Destination))[destIndex]);
-        var destPos = dest.offset();
-        console.log(dest);
-        console.log(destPos);
-        el.animate({
-            top: destPos.top,
-            left: destPos.left
-        }, 1000, function () {
-            el.remove();
-            el.css({ position: 'inherit' });
-            dest.replaceWith(el);
-
-            updateScore(player);
+        function draw() {
             // if (move.DrawLocation != null)
-
             deal(player, move.DrawCard);
-        });
+        }
+
+        if (move.PlayIsDiscard) {
+            var discard = discardContainer(move.PlayCard.Destination);
+            var discardPos = discard.offset();
+
+            discards[move.PlayCard.Destination].push(move.PlayCard);
+
+            el.animate({
+                top: discardPos.top,
+                left: discardPos.left
+            }, 1000, function () {
+                el.remove();
+                el.css({ position: 'absolute', top: 0, left: 0 });
+                discard.append(el);
+
+                draw();
+            });
+        } else {
+
+            var destIndex = getSpotInExpedition(player, move.PlayCard);
+            var dest = $($('.card', expeditionContainer(player, move.PlayCard.Destination))[destIndex]);
+            var destPos = dest.offset();
+
+            el.animate({
+                top: destPos.top,
+                left: destPos.left
+            }, 1000, function() {
+                el.remove();
+                el.css({ position: 'inherit' });
+                dest.replaceWith(el);
+
+                updateScore(player);
+
+                draw();
+            });
+        }
     }
 
     game.client.turn = function (move) {
@@ -181,14 +227,6 @@
             $('#player2info .name').text($('#player2').val());
         });
 
-        $('#deck').click(function () {
-            game.server.play(id);
-        });
-
-        $('body').keyup(function (evt) {
-            if (evt.which == 32) {
-                game.server.play(id);
-            }
-        });
+        enableNext();
     });
 });

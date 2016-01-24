@@ -197,7 +197,7 @@
         });
 
         function draw() {
-            if (move.DrawLocation) {
+            if (move.DrawLocation != null) {
                 takeDiscard(player, move.DrawLocation);
             } else {
                 deal(player, move.DrawCard);

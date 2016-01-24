@@ -65,11 +65,17 @@
             display: 'none'
         });
         $('#play').append(el);
+
+        deck--;
+
         el.fadeIn(1000, function() {
             var spotIndex = getSpotInHand(player, card);
             var spot = $($('.spot', handContainer(player))[spotIndex]);
             var spotPos = spot.offset();
-            enableNext();
+
+            if (deck > 0) {
+                enableNext();
+            }
 
             el.animate({
                 top: spotPos.top,
@@ -80,7 +86,7 @@
                 spot.append(el);
             });
         });
-        deck--;
+
         $('#deck span').text(deck);
     }
 

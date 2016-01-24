@@ -147,6 +147,34 @@
         return $($('#discards .pile')[destination]);
     }
 
+    function takeDiscard(player, destination) {
+        var target = $('.card', discardContainer(destination)).last();
+        var targetPos = target.offset();
+        target.remove();
+        $('#play').append(target);
+        target.css({
+            position: 'absolute',
+            top: targetPos.top,
+            left: targetPos.left
+        });
+
+        var card = discards[destination].pop();
+
+        var spotIndex = getSpotInHand(player, card);
+        var spot = $($('.spot', handContainer(player))[spotIndex]);
+        var spotPos = spot.offset();
+
+        enableNext();
+        target.animate({
+            top: spotPos.top,
+            left: spotPos.left
+        }, 1000, function () {
+            target.remove();
+            target.css({ position: 'inherit' });
+            spot.append(target);
+        });
+    }
+
     function play(player, move) {
         disableNext();
 
@@ -159,11 +187,8 @@
         }
         var spot = $($('.spot', handContainer(player))[i]);
         var el = $('.card', spot);
-        console.log(spot);
-        console.log(el);
         var spotPos = spot.offset();
         el.remove();
-        console.log(spotPos);
         $('#play').append(el);
         el.css({
             position: 'absolute',
@@ -172,8 +197,11 @@
         });
 
         function draw() {
-            // if (move.DrawLocation != null)
-            deal(player, move.DrawCard);
+            if (move.DrawLocation) {
+                takeDiscard(player, move.DrawLocation);
+            } else {
+                deal(player, move.DrawCard);
+            }
         }
 
         if (move.PlayIsDiscard) {

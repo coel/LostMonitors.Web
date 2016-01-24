@@ -101,6 +101,20 @@
     font-size: 4vw;
 }
 
+.player .name {
+    width: 30vw;
+    font-size: 2vw;
+    text-align: center;
+}
+
+.player .score {
+    width: 10vw;
+}
+
+#player1info .score {
+    text-align: right;
+}
+
 #deck {
     display: flex;
     flex-wrap: wrap;

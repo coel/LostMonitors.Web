@@ -12,6 +12,8 @@
     var hands = [[], []];
     var expeditions = [[[], [], [], [], []], [[], [], [], [], []]];
     var turn = PLAYER1;
+    var deck = 60;
+    var scores = [0, 0];
 
     function getSpotInHand(player, card) {
         var hand = hands[player];
@@ -57,6 +59,8 @@
                 spot.append(el);
             });
         });
+        deck--;
+        $('#deck span').text(deck);
     }
 
     game.client.start = function (gameId, initialState) {
@@ -81,6 +85,34 @@
             return $($('#player1expedition .row')[destination]);
 
         return $($('#player2expedition .row')[destination]);
+    }
+
+    function updateScore(player) {
+        var playerExpeditions = expeditions[player];
+        var totalScore = 0;
+        playerExpeditions.forEach(function (expedition) {
+            var score = 0;
+            var multiplier = 1;
+            var bonus = 0;
+            if (expedition.length > 0) {
+                score -= 20;
+            }
+            if (expedition.length >= 10) {
+                bonus += 20;
+            }
+            expedition.forEach(function(card) {
+                if (card.Value == 0) {
+                    multiplier++;
+                } else {
+                    score += card.Value;
+                }
+            });
+
+            totalScore = totalScore + (score * multiplier) + bonus;
+        });
+
+        scores[player] = totalScore;
+        $('#player' + (player + 1) + 'info .score').text(totalScore);
     }
 
     function play(player, move) {
@@ -121,8 +153,12 @@
             el.remove();
             el.css({ position: 'inherit' });
             dest.replaceWith(el);
+
+            updateScore(player);
+            // if (move.DrawLocation != null)
+
+            deal(player, move.DrawCard);
         });
-        
     }
 
     game.client.turn = function (move) {
@@ -141,10 +177,18 @@
             game.server.start($('#player1').val(), $('#player2').val());
             $('#selection').hide();
             $('#board').show();
+            $('#player1info .name').text($('#player1').val());
+            $('#player2info .name').text($('#player2').val());
         });
 
         $('#deck').click(function () {
             game.server.play(id);
+        });
+
+        $('body').keyup(function (evt) {
+            if (evt.which == 32) {
+                game.server.play(id);
+            }
         });
     });
 });

@@ -4,8 +4,6 @@
 
     var id;
 
-    $('#board').hide();
-
     const PLAYER1 = 0;
     const PLAYER2 = 1;
     const MAX_HAND = 8;
@@ -92,6 +90,9 @@
 
     game.client.start = function (gameId, initialState) {
         disableNext();
+        $('#selection').hide();
+        $('#board').show();
+
         console.log(initialState);
         id = gameId;
         console.assert(initialState.Player1Cards.length == MAX_HAND && initialState.Player2Cards.length == MAX_HAND, MAX_HAND + " cards weren't delt each!?");
@@ -255,8 +256,7 @@
     $.connection.hub.start().done(function () {
         $('#start').click(function () {
             game.server.start($('#player1').val(), $('#player2').val());
-            $('#selection').hide();
-            $('#board').show();
+
             $('#player1info .name').text($('#player1').val());
             $('#player2info .name').text($('#player2').val());
         });

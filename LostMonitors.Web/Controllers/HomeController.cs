@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using System.Web.Mvc;
-using LostMonitors.Core;
+using LostMonitors.Core.Services;
 using LostMonitors.Web.Models;
-using Microsoft.AspNet.SignalR;
 
 namespace LostMonitors.Web.Controllers
 {

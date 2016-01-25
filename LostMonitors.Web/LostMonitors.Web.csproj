@@ -166,7 +166,6 @@
     </Compile>
     <Compile Include="Models\GamesModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
-    <Compile Include="PlayerService.cs" />
     <Compile Include="PlayHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

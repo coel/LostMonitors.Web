@@ -247,6 +247,12 @@
         } else {
             turn = PLAYER1;
         }
+
+        if ($('#auto').is(':checked')) {
+            setTimeout(function() {
+                $('#deck').click();
+            }, 3000);
+        }
     };
 
     $.connection.hub.start().done(function () {

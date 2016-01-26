@@ -59,30 +59,24 @@
         el.css({
             position: 'absolute',
             top: deckPos.top,
-            left: deckPos.left,
-            display: 'none'
+            left: deckPos.left
         });
         $('#play').append(el);
 
+        var spotIndex = getSpotInHand(player, card);
+        var spot = $($('.spot', handContainer(player))[spotIndex]);
+        var spotPos = spot.offset();
+
         deck--;
+        enableNext();
 
-        el.fadeIn(1000, function() {
-            var spotIndex = getSpotInHand(player, card);
-            var spot = $($('.spot', handContainer(player))[spotIndex]);
-            var spotPos = spot.offset();
-
-            if (deck > 0) {
-                enableNext();
-            }
-
-            el.animate({
-                top: spotPos.top,
-                left: spotPos.left
-            }, 1000, function() {
-                el.remove();
-                el.css({position: 'inherit'});
-                spot.append(el);
-            });
+        el.animate({
+            top: spotPos.top,
+            left: spotPos.left
+        }, 1000, function () {
+            el.remove();
+            el.css({ position: 'inherit' });
+            spot.append(el);
         });
 
         $('#deck span').text(deck);
@@ -244,6 +238,8 @@
 
     game.client.turn = function (move) {
         console.log(move);
+        if (move == null)
+            return;
 
         play(turn, move);
         if (turn == PLAYER1) {
